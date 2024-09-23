@@ -1,0 +1,29 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- Mostrar el gráfico de barras -->
+    <h2>Gráfico de Barras (Edad vs Salario)</h2>
+    {% if grafico_barras %}
+        <img src="data:image/png;base64,{{ grafico_barras }}" alt="Gráfico de Barras">
+    {% else %}
+        <p>No hay datos para mostrar el gráfico de barras.</p>
+    {% endif %}
+
+    <!-- Mostrar el gráfico circular -->
+    <h2>Gráfico Circular (Personas por Ciudad)</h2>
+    {% if grafico_pie %}
+        <img src="data:image/png;base64,{{ grafico_pie }}" alt="Gráfico Circular">
+    {% else %}
+        <p>No hay datos para mostrar el gráfico circular.</p>
+    {% endif %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

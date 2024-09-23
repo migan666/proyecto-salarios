@@ -1,0 +1,320 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} | Detalle Venta {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <a href="{% url 'lista_venta' %}" >
+        <input type="button" class="btn btn-secondary" value="Regresar">
+    </a>
+    <div class="row mt-3" id="print-content">
+        <div class="col-md-12 ">
+            <div class="card border-0 shadow components-section">
+                <div class="card-body bg-info rounded text-white">
+                    <div class="card-header">
+                        <center><h1 class="card-title">Detalle Venta</h1></center>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 mt-2" >
+            <div class="card card-chart alert ">
+                <div class="row">
+
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Cliente:</h5>
+                        <h5>{{object.cliente}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Fecha:</h5>
+                        <h5>{{object.fecha|date:"D d-m-Y"}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Fecha de reserva:</h5>
+                        <h5>{{object.fecha_reserva|date:"D d-m-Y"}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Metodo de Pago:</h5>
+                        <h5>{{object.metodo_pago}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Nro de operación:</h5>
+                        <h5>{{object.mostrar_nro_operacion}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Solo retorno:</h5>
+                        <h5>{{object.mostrar_solo_retorno}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Salida:</h5>
+                        <h5>{{object.mostrar_salida}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Retorno:</h5>
+                        <h5>{{object.mostrar_retorno}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Tarifa:</h5>
+                        <h5>S/.{{object.tarifa|floatformat:2}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Cantidad:</h5>
+                        <h5>{{object.cantidad}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Valor unitario:</h5>
+                        <h5>S/.{{object.valor_unitario}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Total valor unitario:</h5>
+                        <h5>S/.{{object.total_valor_unitario}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">IGV:</h5>
+                        <h5>S/.{{object.igv}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Total IGV:</h5>
+                        <h5>S/.{{object.total_igv}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Porcentaje IGV:</h5>
+                        <h5>{{object.porcentaje_igv}}%</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Monto:</h5>
+                        <h5>S/.{{object.monto}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Dinero recibido:</h5>
+                        <h5>{{object.mostrar_dinero_recibido}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Cambio:</h5>
+                        <h5>{{object.mostrar_cambio}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Tipo de comprobante:</h5>
+                        <h5>{{object.tipo_comprobante}}</h5>
+                        <hr>
+                    </div>                    
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">{% if object.tipo_comprobante == 'FACTURA' %}Factura:{% else %}Boleta:{% endif %}</h5>
+                        <h5>{{object.obtener_comprobante}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Dispositivo:</h5>
+                        <h5>{{object.obtener_nombre_dispositivo_comprobante}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Registrado:</h5>
+                        <h5>{{object.fecha_registro|date:"D d-m-Y, h:i a"}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-info">Usuario:</h5>
+                        <h5>{{object.usuario_creador}}</h5>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 mt-2" >
+            <div class="card card-chart alert">
+                <div class="card-body" >
+                    <div class="table-responsive">
+                        <div class="card-header">
+                            <h5>Tickets</h5>
+                        </div>
+                        <table id="tabla_detalle_venta" class = "table tablesorter ">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Número</th>
+                                    <th>Salida</th>
+                                    <th>Registro de salida</th>
+                                    <th>Retorno</th>
+                                    <th>Registro de retorno</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for dato in tickets %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>Ticket N° {{dato.id}}</td>
+                                    {% if dato.venta.solo_retorno %}
+                                    <td>---</td>
+                                    <td>---</td>
+                                    <td>Solo retorno</td>
+                                        {% if dato.hora_retorno %}
+                                        <td>{{dato.hora_retorno|date:"h:i a"}}</td>
+                                        {% else %}
+                                        <td>---</td>
+                                        {% endif %}
+                                    {% else %}
+                                    <td>{{dato.venta.salida}}</td>                                    
+                                        {% if dato.hora_salida %}
+                                        <td>{{dato.hora_salida|date:"h:i a"}}</td>
+                                        {% else %}
+                                        <td>---</td>
+                                        {% endif %}
+                                    <td>{{dato.venta.retorno}}</td>
+                                        {% if dato.hora_retorno %}
+                                        <td>{{dato.hora_retorno|date:"h:i a"}}</td>
+                                        {% else %}
+                                        <td>---</td>
+                                        {% endif %}
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {% if not object.activo  %}
+        <div class="col-lg-12 mt-2" >
+            <div class="card card-chart alert ">
+                <div class="row">
+
+                              
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-danger">Nota de crédito:</h5>
+                        <h5>{{comprobante_baja.obtener_serie_comprobante}}</h5>
+                        <hr>
+                    </div>                    
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-danger">Motivo interno:</h5>
+                        <h5>{{comprobante_baja.motivo_interno}}</h5>
+                        <hr>
+                    </div>                    
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-danger">Origen de devolución:</h5>
+                        <h5>{{comprobante_baja.origen_devolucion}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-danger">Eliminación:</h5>
+                        <h5>{{comprobante_baja.fecha_registro|date:"D d-m-Y, h:i a"}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-danger">Usuario:</h5>
+                        <h5>{{comprobante_baja.usuario_creador}}</h5>
+                        <hr>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h5 class="text-danger">Dispositivo:</h5>
+                        <h5>{{comprobante_baja.dispositivo}}</h5>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if impresiones %}
+        <div class="col-lg-12 mt-2" >
+            <div class="card card-chart alert">
+                <div class="card-body" >
+                    <div class="table-responsive">
+                        <div class="card-header">
+                            <h5>Impresiones de copia de comprobante</h5>
+                        </div>
+                        <table id="tabla_detalle_venta" class = "table tablesorter ">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Motivo</th>
+                                    <th>Fecha y hora registro</th>
+                                    <th>Usuario</th>
+                                    <th>Dispositivo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for dato in impresiones %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{dato.motivo}}</td>
+                                    <td>{{dato.fecha_registro|date:"D d-m-Y, h:i a"}}</td>
+                                    <td>{{dato.usuario_creador}}</td>
+                                    <td>{{dato.dispositivo}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <a href="{% url 'detalle_venta_pdf' object.id  %}" target="_blank">
+        <button href="javascript:void(0)" class="btn btn-link" data-bs-toggle="tooltip" data-bs-placement="top"  title="Imprimir" >
+            <img src="/static/assets/img/brand/imprimir.svg" height="20" width="20" >
+        </button>
+    </a>
+{% endblock content %}
+<!-- La página específica JS va AQUÍ -->
+{% block javascripts %}
+<script>
+
+    document.getElementById("imprimir").addEventListener("click", function() {
+        document.getElementById('preloader').style.display = 'flex';
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = pdf.internal.pageSize.getHeight();
+        const margin = 5; // Margen de 10mm
+
+        html2canvas(document.getElementById("print-content"), {
+            scale: 4, // Aumentamos la escala para mejorar la calidad
+            useCORS: true, // Permite capturar imágenes con dominios cruzados
+            logging: true // Activamos logging para depurar
+        }).then(canvas => {
+            document.getElementById('preloader').style.display = 'none';
+            const imgData = canvas.toDataURL('image/jpeg', 1.0); // JPEG con máxima calidad
+            const imgProps = pdf.getImageProperties(imgData);
+            const imgWidth = pdfWidth - 2 * margin;
+            const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+            const pageHeight = pdfHeight - 2 * margin;
+
+            let position = 0;
+            while (position < imgHeight) {
+                pdf.addImage(imgData, 'JPEG', margin, margin - position, imgWidth, imgHeight);
+                position += pageHeight;
+                if (position < imgHeight) {
+                    pdf.addPage();
+                }
+            }
+
+            pdf.save('detalle_venta.pdf');
+        });
+    });
+</script>
+{% endblock javascripts %}

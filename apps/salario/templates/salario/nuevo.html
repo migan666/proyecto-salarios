@@ -1,0 +1,50 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} | Nuevo Cliente {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card border-0 shadow components-section">
+                <div class="card-body">
+                    <div class="col-md-2 mb-0">
+                        <a href="{% url 'lista_salarios' %}">
+                            <input type="button" class="btn btn-secondary" value="Regresar">
+                        </a>
+                    </div>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-10 mb-0">
+                                <h1 class="card-title">{{encabezado}}</h1>
+                            </div>
+                            <div class="col-md-2 mb-0">
+                                <img src="/static/assets/img/brand/salario.svg" height="100" width="100" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {% crispy form %}{% csrf_token %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block javascripts %}
+    <script >
+        $(document).ready(function() {
+            $('.select2').select2({
+                theme:'bootstrap4',
+                lenguaje:'es',
+                placeholder:"Seleccione",
+                width: '100%'
+            });
+
+        });
+    </script>
+{% endblock javascripts %}
